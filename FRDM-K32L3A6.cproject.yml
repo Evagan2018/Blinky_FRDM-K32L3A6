@@ -7,11 +7,11 @@ project:
 
   misc:
     - Link:
-        - '--diag_suppress 6314'
+      - '--diag_suppress 6314'
 
   groups:
     - group: Documentation
-      files:
+      files: 
         - file: ./README.md
     - group: App
       files:
@@ -65,9 +65,7 @@ project:
     - component: ARM::CMSIS Driver:SPI:Custom
     - component: NXP::CMSIS Driver:USART:lpuart_cmsis
     - component: ARM::CMSIS Driver:VIO:Custom
-    - component: ARM::CMSIS-Compiler:STDERR:Custom
-    - component: ARM::CMSIS-Compiler:STDIN:Custom
-    - component: ARM::CMSIS-Compiler:STDOUT:Custom
-    - component: ARM::CMSIS-Compiler:CORE
-  packs:
-    - pack: ARM::CMSIS-Compiler@2.0.0
+
+    - component: ARM::CMSIS-Compiler:I/O:STDERR&User
+    - component: ARM::CMSIS-Compiler:I/O:STDOUT&User
+    - component: ARM::CMSIS-Compiler:I/O:STDIN&User

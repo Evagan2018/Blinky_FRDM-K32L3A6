@@ -24,7 +24,8 @@ solution:
 
   packs:
     - pack: ARM::CMSIS@5.9.0
-    - pack: ARM::CMSIS-Compiler@2.0.0
+#    - pack: Keil::ARM_Compiler
+    - pack: ARM::CMSIS-Compiler
 
     # packs for FRDM-K32L3A6
     - pack: NXP::K32L3A60_DFP@13.0.0

@@ -21,14 +21,14 @@ solution:
         - --diag_suppress 6848
 
   packs:
-    - pack: ARM::CMSIS@>=6.0.0
+    - pack: ARM::CMSIS@6.0.0
     - pack: ARM::CMSIS-Compiler
     - pack: ARM::CMSIS-RTX
     - pack: ARM::CMSIS-View
 
     # packs for FRDM-K32L3A6
-    - pack: NXP::K32L3A60_DFP@17.0.0
-    - pack: NXP::FRDM-K32L3A6_BSP@17.0.0
+    - pack: NXP::K32L3A60_DFP@18.0.0
+    - pack: NXP::FRDM-K32L3A6_BSP@18.0.0
 
   target-types:
     - type: FRDM-K32L3A6

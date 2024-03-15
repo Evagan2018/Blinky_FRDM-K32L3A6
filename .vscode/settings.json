@@ -1,0 +1,12 @@
+{
+    "cmsis-csolution.actions": [
+        {
+            "path": "Blinky.csolution.yml",
+            "target": "FRDM-K32L3A6",
+            "config": {
+                "debug": "Arm Debugger",
+                "run": "Flash Device"
+            }
+        }
+    ]
+}

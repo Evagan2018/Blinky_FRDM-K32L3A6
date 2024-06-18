@@ -12,6 +12,7 @@ Refer to [Project Configuration](#project-configuration) for board specific sett
 
 [![Keil Studio Cloud - Import Project](https://img.shields.io/badge/Keil_Studio_Cloud-Import_Project-0091bd?logo=arm&logoColor=0091bd)](https://studio.keil.arm.com/?import=https://github.com/Arm-Examples/Blinky_FRDM-K32L3A6.git)
 [![example workflow](https://img.shields.io/github/actions/workflow/status/Arm-Examples/Blinky_FRDM-K32L3A6/ci.yml?logo=arm&logoColor=0091bd&label=Example%20Publishable)](https://www.keil.arm.com/)
+[![CMSIS Compliance](https://img.shields.io/github/actions/workflow/status/Arm-Examples/Blinky_FRDM-K32L3A6/verify.yml?logo=arm&logoColor=0091bd&label=CMSIS%20Compliance)](https://www.keil.arm.com/cmsis) 
 
 ## Prerequisites
 

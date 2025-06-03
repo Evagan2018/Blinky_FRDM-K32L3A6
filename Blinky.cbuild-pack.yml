@@ -3,7 +3,6 @@ cbuild-pack:
     - resolved-pack: ARM::CMSIS@6.0.0
       selected-by-pack:
         - ARM::CMSIS@6.0.0
-        - ARM::CMSIS@>=6.0.0
     - resolved-pack: ARM::CMSIS-Compiler@2.0.0
       selected-by-pack:
         - ARM::CMSIS-Compiler
@@ -13,15 +12,9 @@ cbuild-pack:
     - resolved-pack: ARM::CMSIS-View@1.1.0
       selected-by-pack:
         - ARM::CMSIS-View
-    - resolved-pack: NXP::FRDM-K32L3A6_BSP@17.0.0
-      selected-by-pack:
-        - NXP::FRDM-K32L3A6_BSP@17.0.0
     - resolved-pack: NXP::FRDM-K32L3A6_BSP@18.0.0
       selected-by-pack:
         - NXP::FRDM-K32L3A6_BSP@18.0.0
-    - resolved-pack: NXP::K32L3A60_DFP@17.0.0
-      selected-by-pack:
-        - NXP::K32L3A60_DFP@17.0.0
     - resolved-pack: NXP::K32L3A60_DFP@18.0.0
       selected-by-pack:
         - NXP::K32L3A60_DFP@18.0.0

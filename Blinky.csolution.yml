@@ -1,26 +1,11 @@
 solution:
-  created-for: cmsis-toolbox@2.10.0
+  created-for: cmsis-toolbox@2.12.0
   description: Simple blinky example for FRDM-K32L3A6.
-  compiler: AC6
+  cdefault:
 
-  misc:
-    - for-compiler: AC6
-      C-CPP:
-        - -Wno-macro-redefined
-        - -Wno-pragma-pack
-        - -Wno-parentheses-equality
-        - -gdwarf-5
-      C:
-        - -std=gnu11
-      ASM:
-        - -masm=auto
-        - -gdwarf-5
-      Link:
-        - --entry=Reset_Handler
-        - --info summarysizes
-        - --summary_stderr
-        - --diag_suppress 6314
-        - --diag_suppress 6848
+  select-compiler:
+    - compiler: AC6
+  compiler: AC6
 
   packs:
     - pack: ARM::CMSIS
@@ -31,6 +16,13 @@ solution:
     # packs for FRDM-K32L3A6
     - pack: NXP::K32L3A60_DFP
     - pack: NXP::FRDM-K32L3A6_BSP
+
+  misc:
+    - for-compiler: AC6
+      C-CPP:
+        - -gdwarf-5
+      ASM:
+        - -gdwarf-5
 
   target-types:
     - type: FRDM-K32L3A6
@@ -43,6 +35,8 @@ solution:
             port: 3333
             protocol: swd
             clock: 10000000
+          images:
+            - project-context: FRDM-K32L3A6.Debug
 
   build-types:
     - type: Debug

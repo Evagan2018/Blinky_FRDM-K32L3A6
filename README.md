@@ -6,7 +6,7 @@ The **Blinky** project can be easily used to verify the basic tool setup:
 - Pressing `vioBUTTON0` changes the blink frequency and start/stops `vioLED1`.
 - `printf` messages are shown on the serial console.
 
-The output of the serial console can be observed in a Terminal window on VS Code.
+The output of the serial console can be observed via the **SERIAL MONITOR** in Visual Studio Code.
 
 Refer to [Project Configuration](#project-configuration) for board specific settings.
 
@@ -16,136 +16,83 @@ Refer to [Project Configuration](#project-configuration) for board specific sett
 
 ## Prerequisites
 
-### Tools:
- - [CMSIS-Toolbox v2.0.0](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases) or newer
- - [Microsoft Visual Studio Code](https://code.visualstudio.com/download) with Keil Studio Pack extension (optional, alternatively CLI can be used)
- - [Arm Compiler 6](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded) (automatically installed when using Visual Studio Code with vcpkg)
+The following tools need to be installed on your machine:
 
-## Build Solution/Project
+- [CMSIS-Toolbox v2.12.0](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases) or newer
+- [Microsoft Visual Studio Code](https://code.visualstudio.com/download) with
+  [Keil Studio Pack](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) extension (optional,
+  alternatively [CLI](#using-command-line-interface-cli) can be used)
+- [Arm Compiler 6](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded) (automatically
+  installed when using Visual Studio Code with vcpkg)
 
-### Using Visual Studio Code with extensions
+## Build solution
 
-Required tools described in file 'vcpkg-configuration.json' should be automatically installed by vcpkg. You can see the status of vcpkg in the status bar.
+### Using Keil Studio
 
-Required CMSIS packs need to be also installed. In case a required pack is missing, a notification window will pop-up to install the missing pack.
+The following is written for [Keil Studio](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack), a
+set of VS Code extensions.
 
-Open the **CMSIS view** from the side bar, select desired 'Build Type' and press the 'Build' button.
+Required tools described in file `vcpkg-configuration.json` should be automatically installed by vcpkg. You can see the
+status of vcpkg in the status bar.
 
-### Using Command Line Interface (CLI)
+Required CMSIS packs need to be also installed. In case a required pack is missing, a notification window will pop-up
+to install the missing pack.
+
+Open the **CMSIS view** from the side bar and press the **Build** button.
+
+### Using command line interface (CLI)
 
 Download required packs (not required when the packs are already available) by executing the following commands:
-   ```sh
-   csolution list packs -s hello.csolution.yml -m >packs.txt
-   cpackget update-index
-   cpackget add -f packs.txt
-   ```
-Build the project by executing the following command:
+
 ```sh
-cbuild hello.csolution.yml
+csolution list packs -s Blinky.csolution.yml -m > packs.txt
+cpackget update-index
+cpackget add -f packs.txt
 ```
 
-## Run the application
+Build the project by executing the following command:
 
-### Prerequisite
+```sh
+cbuild Blinky.csolution.yml
+```
 
-Follow the [instructions](https://www.nxp.com/design/design-center/development-boards-and-designs/OPENSDA#FRDM-K32L3A6)
-for updating on-board OpenSDA to the latest DAPLink FW.
+## Run and debug in Keil Studio
 
-### Using Visual Studio Code with extensions
+### Run
 
-- Connect the board's DAPLink USB to the PC (provides also power).
-- Connect to the board's serial port using the **Serial Monitor** in the panel area.
-- Open the **CMSIS view** from the activity bar, press the 'Load & Run' button, and wait until the image is programmed and starts running.
-- Observe the terminal output.
+- Connect the board's OpenSDA USB to the PC (provides also power).
+- Open the 'CMSIS' view from the side bar and press the 'Run' button and wait until the image is programmed and starts
+  running.
 
-## Debug the application
+### Debug
 
-Before starting to debug the application, make sure that you have gone through the steps as
-described in the [run the application](#run-the-application) section.
+Open the **CMSIS** view from the side bar and press the **Debug** button. In the **Debug** view, use the
+**SERIAL MONITOR** to connect to the board's serial port with 115200 baud rate and observe the output.
 
-Open the **CMSIS view** from the activity bar, press the 'Load & Debug' button, and wait until the image is programmed and the debug session
-starts. It will run to `main` and stop there. Start debugging.
+RTOS awareness is available through the **XRTOS** view in the bottom panel.
 
 ## Project Configuration
 
-### RTOS: Keil RTX5 Real-Time Operating System
+### Keil RTX5 real-time operating system
 
-The real-time operating system [Keil RTX5](https://arm-software.github.io/CMSIS_5/RTOS2/html/rtx5_impl.html) implements the resource management. 
+The real-time operating system [Keil RTX5](https://arm-software.github.io/CMSIS-RTX/latest/index.html) implements
+the resource management.
 
 It is configured with the following settings:
 
-- [Global Dynamic Memory size](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html#systemConfig): 24000 bytes
-- [Default Thread Stack size](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html#threadConfig): 3072 bytes
-- [Event Recorder Configuration](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html#evtrecConfig)
-  - [Global Initialization](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html#evtrecConfigGlobIni): 1
-    - Start Recording: 1
+- [Global Dynamic Memory size](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#systemConfig_glob_mem):
+  2048 bytes
+- [Default Thread Stack size](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#threadConfig): 256 bytes
+- [Idle Thread Stack size](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#threadConfig): 128 bytes
+- [Timer Thread Stack size](hhttps://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#timerConfig): 256 bytes
+- [Stack Overflow Checking](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#threadConfig_ovfcheck) and
+  [Stack Usage Watermark](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html#threadConfig_watermark)
+  enabled
 
-Refer to [Configure RTX v5](https://arm-software.github.io/CMSIS_5/RTOS2/html/config_rtx5.html) for a detailed description of all configuration options.
+Refer to [Configure RTX v5](https://arm-software.github.io/CMSIS-RTX/latest/config_rtx5.html) for a detailed
+description of all configuration options.
 
-### Board: NXP FRDM-K32L3A6
-
-The tables below list the device configuration for this board. The board layer for the NXP FRDM-K32L3A6 is using the software component `::Board Support: SDK Project Template: project_template (Variant: frdmk32l3a6)` from `NXP.FRDM-K32L3A6_BSP.13.0.0` pack.
-
-The heap/stack setup and the CMSIS-Driver assignment is in configuration files of related software components.
-
-The example project can be re-configured to work on custom hardware. Refer to ["Configuring Example Projects with MCUXpresso Config Tools"](https://github.com/MDK-Packs/Documentation/tree/master/Using_MCUXpresso) for information.
-
-#### System Configuration
-
-| System Component        | Setting
-|:------------------------|:-------------------------------------------------------------
-| Device                  | K32L3A60VPJ1A:cm4
-| Board                   | FRDM-K32L3A6
-| SDK Version             | ksdk2_0
-| Heap                    | 64 kB (configured in linker script K32L3A60xxx_cm4*.scf file)
-| Stack (MSP)             |  1 kB (configured in linker script K32L3A60xxx_cm4*.scf file)
-
-#### Clock Configuration
-
-| Clock                   | Setting
-|:------------------------|:-------
-| FIRC                    |  48 MHz
-| FIRC DIV1 clock         |  48 MHz
-| FIRC DIV2 clock         |  48 MHz
-| FIRC DIV3 clock         |  48 MHz
-| LPUART0 clock           |  48 MHz
-| LPUART1 clock           |  48 MHz
-| LPSPI0 clock            |  48 MHz
-| LPI2C3 clock            |  48 MHz
-
-**Note:** configured with Functional Group: `BOARD_BootClockRUN`
-
-#### GPIO Configuration and usage
-
-| Functional Group            | Pin | Peripheral | Signal   | Identifier         | Pin Settings                           | Usage
-|:----------------------------|:----|:-----------|:---------|:-------------------|:---------------------------------------|:-----------------------------------
-| BOARD_InitDEBUG_UART        | N2  | LPUART0    | TX       | DEBUG_UART0_TX     | default                                | LPUART0 TX for debug console (PTC8)
-| BOARD_InitDEBUG_UART        | P3  | LPUART0    | RX       | DEBUG_UART0_RX     | default                                | LPUART0 RX for debug console (PTC7)
-| BOARD_InitLEDs              | D6  | GPIOA      | GPIO, 24 | RGB_RED            | default                                | User LED1 (PTA24)
-| BOARD_InitLEDs              | E6  | GPIOA      | GPIO, 23 | RGB_GREEN          | default                                | User LED2 (PTA23)
-| BOARD_InitLEDs              | B6  | GPIOA      | GPIO, 22 | RGB_BLUE           | default                                | User LED3 (PTA22)
-| BOARD_InitButtons           | B10 | GPIOA      | GPIO,  0 | SW2                | default                                | User Button SW2 (PTA2)
-| BOARD_InitButtons           | P16 | GPIOE      | GPIO,  8 | SW3                | default                                | User Button SW3 (PTE8)
-| BOARD_InitButtons           | N16 | GPIOE      | GPIO,  9 | SW4                | default                                | User Button SW4 (PTE9)
-| BOARD_InitButtons           | L12 | GPIOE      | GPIO, 12 | SW5                | default                                | User Button SW5 (PTE12)
-| BOARD_InitARDUINO_UART      | A5  | LPUART1    | TX       | ARDUINO_LPUART1_TX | default                                | Arduino UNO R3 pin D1 (PTA26)
-| BOARD_InitARDUINO_UART      | B5  | LPUART1    | RX       | ARDUINO_LPUART1_RX | default                                | Arduino UNO R3 pin D0 (PTA27)
-| BOARD_InitARDUINO_SPI       | C2  | LPSPI0     | SCK      | ARDUINO_SPI_SCK    | default                                | Arduino UNO R3 pin D13 (PTB4)
-| BOARD_InitARDUINO_SPI       | D2  | LPSPI0     | SOUT     | ARDUINO_SPI_MOSI   | default                                | Arduino UNO R3 pin D11 (PTB5)
-| BOARD_InitARDUINO_SPI       | E2  | LPSPI0     | SIN      | ARDUINO_SPI_MISO   | default                                | Arduino UNO R3 pin D12 (PTB7)
-| BOARD_InitARDUINO_SPI       | E1  | GPIOB      | GPIO,  6 | ARDUINO_SPI_SSN    | Direction Output, GPIO initial state 1 | Arduino UNO R3 pin D10 (PTB6)
-| BOARD_InitPins_Arduino_PTB3 | C1  | GPIOB      | GPIO,  3 | ARDUINO_PTB3       | Direction Input                        | Arduino UNO R3 pin D9  (PTB3)
-
-#### NVIC Configuration
-
-| NVIC Interrupt      | Priority
-|:--------------------|:--------
-| LPUART1             | 4
-| LPSPI0              | 4
-
-**STDIO** is routed to a debug console through Virtual COM port (DAP-Link, peripheral = LPUART0, baudrate = 115200)
-
-#### CMSIS-Driver mapping
+### CMSIS-Driver mapping
 
 | CMSIS-Driver | Peripheral
 |:-------------|:----------
@@ -153,6 +100,10 @@ The example project can be re-configured to work on custom hardware. Refer to ["
 
 | CMSIS-Driver VIO  | Physical board hardware
 |:------------------|:------------------------------
-| vioBUTTON0        | User Button SW2
-| vioLED0           | User LED RED
-| vioLED1           | User LED GREEN
+| vioBUTTON0        | User Button (SW2)
+| vioLED0           | User LED Red (RGB)
+| vioLED1           | User LED Green (RGB)
+
+### Other settings
+
+**STDIO** is routed to a debug console through a virtual COM port (via OpenSDA, baudrate = 115200).

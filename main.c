@@ -61,15 +61,5 @@ int main (void) {
 
   vioInit();                            // Initialize Virtual I/O
 
-#if defined(RTE_Compiler_EventRecorder) && \
-    (defined(__MICROLIB) || \
-    !(defined(RTE_CMSIS_RTOS2_RTX5) || defined(RTE_CMSIS_RTOS2_FreeRTOS)))
-  EventRecorderInitialize(EventRecordAll, 1U);
-#endif
-
-  osKernelInitialize();                 // Initialize CMSIS-RTOS2
-  app_initialize();                     // Initialize application
-  osKernelStart();                      // Start thread execution
-
-  for (;;) {}
+  return (app_main());
 }

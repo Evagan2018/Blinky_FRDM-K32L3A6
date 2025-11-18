@@ -1,11 +1,10 @@
 project:
 
+  # Project defines
   define:
+    - OS_IDLE_THREAD_NAME: \"Idle\"
+    - OS_TIMER_THREAD_NAME: \"Timer\"
     - SDK_DEBUGCONSOLE: 1
-
-  misc:
-    - Link:
-        - '--diag_suppress 6314'
 
   groups:
     - group: Documentation
@@ -62,9 +61,6 @@ project:
 
     - component: NXP::Device:SDK Project Template:RTE_Device
 
-    - component: NXP::Device:SDK Utilities:assert
-    - component: NXP::Device:SDK Utilities:debug_console
-
     - component: NXP::Device:SDK Utilities:serial_manager
     - component: NXP::Device:SDK Utilities:serial_manager_uart
 
@@ -81,8 +77,9 @@ project:
     - component: ARM::CMSIS-Compiler:STDERR:Custom
     - component: ARM::CMSIS-Compiler:STDOUT:Custom
     - component: ARM::CMSIS-Compiler:STDIN:Custom
-    - component: NXP::Device:SDK Utilities:debug console template config
     - component: NXP::Device:SDK Utilities:str
+    - component: NXP::Device:SDK Utilities:assert
+    - component: NXP::Device:SDK Utilities:debug_console
   packs:
     - pack: ARM::CMSIS
     - pack: ARM::CMSIS-Compiler
@@ -93,6 +90,7 @@ project:
 
   output:
     type:
-    - elf
-    - hex
-    - map
+      - elf
+      - hex
+      - bin
+      - map

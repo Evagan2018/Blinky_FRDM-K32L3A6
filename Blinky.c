@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------
- * Copyright (c) 2023 Arm Limited (or its affiliates). All rights reserved.
+ * Copyright (c) 2025 Arm Limited (or its affiliates). All rights reserved.
  *
  * SPDX-License-Identifier: Apache-2.0
  *
@@ -25,7 +25,6 @@
 #include "cmsis_os2.h"
 #include "cmsis_vio.h"
 
-// test comment
 static   osThreadId_t tid_thrLED;       // Thread id of thread: LED
 static   osThreadId_t tid_thrButton;    // Thread id of thread: Button
 volatile     uint32_t g_ledSet = 0;     // Variable to store virtual LED value:
@@ -33,6 +32,11 @@ volatile     uint32_t g_ledSet = 0;     // Variable to store virtual LED value:
                                         // 1 = LED0 on,  LED1 off
                                         // 2 = LED0 off, LED1 on
                                         // 3 = LED0 on,  LED1 on
+
+// Create thread attribute to show thread name in the XRTOS viewer:
+const osThreadAttr_t app_main_attr = {.name = "MainThread"};
+const osThreadAttr_t thrLED_attr = {.name = "LEDThread", .stack_size = 768U}; // LED thread requires more stack than default
+const osThreadAttr_t thrButton_attr = {.name = "ButtonThread"};
 
 /*---------------------------------------------------------------------------
   thrLED: blink LED
@@ -96,21 +100,25 @@ __NO_RETURN static void thrButton (void *arg) {
 /*---------------------------------------------------------------------------
  * Application main thread
  *---------------------------------------------------------------------------*/
-static void app_main (void *argument) {
+static void app_main_thread (void *argument) {
   (void)argument;
 
-  tid_thrLED = osThreadNew(thrLED, NULL, NULL);         // Create LED thread
+  tid_thrLED = osThreadNew(thrLED, NULL, &thrLED_attr);         // Create LED thread
   if (tid_thrLED == NULL) { /* add error handling */ }
 
-  tid_thrButton = osThreadNew(thrButton, NULL, NULL);   // Create Button thread
+  tid_thrButton = osThreadNew(thrButton, NULL, &thrButton_attr);   // Create Button thread
   if (tid_thrButton == NULL) { /* add error handling */ }
 
-  osThreadExit();
+  for (;;) {                            // Loop forever
+  }
 }
 
-/*---------------------------------------------------------------------------
+/*-----------------------------------------------------------------------------
  * Application initialization
- *---------------------------------------------------------------------------*/
-void app_initialize (void) {
-  osThreadNew(app_main, NULL, NULL);
+ *----------------------------------------------------------------------------*/
+int app_main (void) {
+  osKernelInitialize();                         /* Initialize CMSIS-RTOS2 */
+  osThreadNew(app_main_thread, NULL, &app_main_attr);
+  osKernelStart();                              /* Start thread execution */
+  return 0;
 }

@@ -29,6 +29,9 @@ extern uint32_t LPUART3_GetFreq    (void);
 extern void     LPUART3_InitPins   (void);
 extern void     LPUART3_DeinitPins (void);
 
-extern void     app_initialize     (void);
+/* Prototypes */
+extern int app_main     (void);
+extern int shield_setup (void);
+extern int stdio_init   (void);
 
 #endif

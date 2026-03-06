@@ -1,3 +1,8 @@
+[![License](https://img.shields.io/badge/License-Apache--2.0-green?label=License)](https://github.com/Arm-Examples/Blinky_FRDM-K32L3A6/blob/main/LICENSE)
+[![Keil Studio Cloud - Import Project](https://img.shields.io/badge/Keil_Studio_Cloud-Import_Project-0091bd?logo=arm&logoColor=0091bd)](https://studio.keil.arm.com/?import=https://github.com/Arm-Examples/Blinky_FRDM-K32L3A6.git)
+[![example workflow](https://img.shields.io/github/actions/workflow/status/Arm-Examples/Blinky_FRDM-K32L3A6/ci.yml?logo=arm&logoColor=0091bd&label=Example%20Publishable)](https://www.keil.arm.com/)
+[![CMSIS Compliance](https://img.shields.io/github/actions/workflow/status/Arm-Examples/Blinky_FRDM-K32L3A6/verify.yml?logo=arm&logoColor=0091bd&label=CMSIS%20Compliance)](https://www.keil.arm.com/cmsis) 
+
 # Blinky Project for FRDM-K32L3A6 (Cortex-M4)
 
 The **Blinky** project can be easily used to verify the basic tool setup:
@@ -10,9 +15,6 @@ The output of the serial console can be observed via the **SERIAL MONITOR** in V
 
 Refer to [Project Configuration](#project-configuration) for board specific settings.
 
-[![Keil Studio Cloud - Import Project](https://img.shields.io/badge/Keil_Studio_Cloud-Import_Project-0091bd?logo=arm&logoColor=0091bd)](https://studio.keil.arm.com/?import=https://github.com/Arm-Examples/Blinky_FRDM-K32L3A6.git)
-[![example workflow](https://img.shields.io/github/actions/workflow/status/Arm-Examples/Blinky_FRDM-K32L3A6/ci.yml?logo=arm&logoColor=0091bd&label=Example%20Publishable)](https://www.keil.arm.com/)
-[![CMSIS Compliance](https://img.shields.io/github/actions/workflow/status/Arm-Examples/Blinky_FRDM-K32L3A6/verify.yml?logo=arm&logoColor=0091bd&label=CMSIS%20Compliance)](https://www.keil.arm.com/cmsis) 
 
 ## Prerequisites
 
